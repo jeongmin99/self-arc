@@ -1,0 +1,23 @@
+name: build-and-run hello-kube
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-run:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check docker
+        run: docker info
+
+      - name: Build image
+        run: |
+          docker build -t hello-kube ./hello-kube
+
+      - name: Run container
+        run: |
+          docker run --rm hello-image
