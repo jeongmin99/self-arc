@@ -20,4 +20,4 @@ jobs:
 
       - name: Run container
         run: |
-          docker run --rm hello-image
+          docker run --rm hello-kube
