@@ -12,7 +12,7 @@ def main():
 
     config = client.Configuration()
     config.host = "https://kubernetes.default.svc"
-    config.ssl_ca_cert = False
+    config.verify_ssl = False
 
     config.api_key = {
         "authorization": "Bearer " + TOKEN
