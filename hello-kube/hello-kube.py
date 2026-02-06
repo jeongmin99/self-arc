@@ -1,12 +1,24 @@
 import time
-from kubernetes import config, client
+import os
+from kubernetes import client
 
 
 POD_NAME="hello"
 NAMESPACE="default"
 
 def main():
-    config.load_kube_config()
+
+    TOKEN = os.environ["KUBE_TOKEN"]
+
+    config = client.Configuration()
+    config.host = "https://kubernetes.default.svc"
+    config.ssl_ca_cert = False
+
+    config.api_key = {
+        "authorization": "Bearer " + TOKEN
+    }
+
+    client.Configuration.set_default(config)
     v1=client.CoreV1Api()
 
     pod_manifest = {
