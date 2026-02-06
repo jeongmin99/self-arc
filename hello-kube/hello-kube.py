@@ -9,10 +9,10 @@ NAMESPACE="default"
 def main():
 
     TOKEN = os.environ["KUBE_TOKEN"]
-    print(TOKEN)
+
     config = client.Configuration()
     config.host = "https://kubernetes.default.svc"
-    config.verify_ssl = False
+    config.verify_ssl = "/ca/ca.crt"
 
     config.api_key = {
         "authorization": "Bearer " + TOKEN
