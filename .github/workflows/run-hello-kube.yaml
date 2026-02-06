@@ -20,7 +20,7 @@ jobs:
             "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=kubernetes" \
             | jq -r '.value')
             
-          echo "OIDC_TOKEN=$TOKEN" >> $GITHUB_ENV
+          echo "KUBE_TOKEN=$TOKEN" >> $GITHUB_ENV
       
       - name: Check docker
         run: docker info
