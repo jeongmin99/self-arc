@@ -1,0 +1,16 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: example-runnerdeploy
+spec:
+  replicas: 1
+  template:
+    spec:
+      repository: jeongmin99/deepauto-assignment
+      volumeMounts:
+        - mountPath: /ca
+          name: ca
+      volumes:
+        - name: ca
+          configMap:
+              name: kube-root-ca.crt
