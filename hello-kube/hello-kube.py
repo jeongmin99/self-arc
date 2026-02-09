@@ -1,5 +1,6 @@
 import time
 import os
+import base64
 from kubernetes import client
 
 
@@ -10,9 +11,15 @@ def main():
 
     TOKEN = os.environ["KUBE_TOKEN"]
 
+    ca_data = base64.b64decode(os.environ["CA_CERT"])
+    #ca.crt 파일 생성
+    with open("/tmp/ca.crt", "wb") as f:
+        f.write(ca_data)
+
     config = client.Configuration()
     config.host = "https://kubernetes.default.svc"
-    config.ssl_ca_cert = "/ca/ca.crt"
+
+    config.ssl_ca_cert = "/tmp/ca.crt"
 
     config.api_key = {
         "authorization": "Bearer " + TOKEN

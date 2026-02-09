@@ -31,4 +31,5 @@ jobs:
       
       - name: Run container
         run: |
-          docker run --rm -e KUBE_TOKEN="${KUBE_TOKEN}" -v /ca:/ca:ro hello-kube
+          CA=$(cat /ca/ca.crt | base64 -w 0)
+          docker run --rm -e KUBE_TOKEN="${KUBE_TOKEN}" -e CA_CERT="$CA" hello-kube
