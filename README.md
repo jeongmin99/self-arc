@@ -6,6 +6,11 @@
 
 ## 아키텍처 ##
 
+
+본 시스템은 ServiceAccount 대신 GitHub OIDC를 통해 K8s 권한을 획득하며, ARC 관련 구성 요소는 ArgoCD에 의해 선언적으로 관리됩니다.
+
+
+
 ## 실행 방법 ##
 
 ### 1. minikube 실행 (OIDC 설정 포함) ###
@@ -44,7 +49,9 @@ minikube kubectl -- create secret generic controller-manager ^
 
 ArgoCD가 GitHub레포지토리를 인식할 수 있도록 Secret을 설정합니다.
 
-이 때, <GITHB_NAME>에 GitHub 사용자명, <GITHUB_PAT>에 GitHub Action Token 값을 기입 후 배포합니다.
+이 때, <GITHUB_NAME>에 GitHub 사용자명, <GITHUB_PAT>에 GitHub Action Token 값을 기입 후 배포합니다.
+
+<sub>boostrap/add-repo.yaml</sub>
 ```
 apiVersion: v1
 kind: Secret
@@ -61,7 +68,7 @@ stringData:
 ```
 
 ```
-minikube kubectl -- apply -f bootstrap/add.repo.yaml
+minikube kubectl -- apply -f bootstrap/add-repo.yaml
 ```
 
 ### 5. ARC 배포 ###
