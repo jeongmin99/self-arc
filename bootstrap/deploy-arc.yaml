@@ -1,0 +1,72 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jeongmin99/deepauto-assignment
+    targetRevision: main
+    path: manifests/cert-manager 
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+        - ApplyOutOfSyncOnly=true       
+        - ServerSideApply=true       
+      
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: arc
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jeongmin99/deepauto-assignment
+    targetRevision: main
+    path: manifests/actions-runner-controller
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: actions-runner-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+        - ApplyOutOfSyncOnly=true       
+        - ServerSideApply=true       
+        
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: arc-runner
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jeongmin99/deepauto-assignment
+    targetRevision: main
+    path: manifests/runners    
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+        - ApplyOutOfSyncOnly=true       
+        - ServerSideApply=true       
+      
