@@ -1,24 +1,16 @@
 # DeepAuto Assignment
+이 문서는 Minikube 환경에서 ARC(Action Runner Controller)를 활용한 GitOps 파이프라인 구축 가이드를 담고 있습니다.
 
 ## 실행 환경 ##
-
-Host: Windows
-
-Kubernetes Cluster: Minikube
-
-Programming Language: Python
-
-Container Builder: Docker
-
-CD: ArgoCD
-
 
 
 ## 아키텍처 ##
 
 ## 실행 방법 ##
 
-1. minikube oidc 파라미터 설정하여 실행
+### 1. minikube 실행 (OIDC 설정 포함) ###
+
+GitHub Action Token을 인식할 수 있도록 API 서버를 설정하며 시작합니다.
 ```
 minikube start ^
   --extra-config=apiserver.oidc-issuer-url=https://token.actions.githubusercontent.com ^
@@ -26,22 +18,33 @@ minikube start ^
   --extra-config=apiserver.oidc-username-claim=sub
 ```
 
-2. helm을 통한 argocd 설치
+### 2. ArgoCD 설치 (helm 사용) ###
+
+GitOps 방식으로 ARC를 관리하기 위해 ArgoCD를 먼저 설치하고 레포지토리를 등록합니다.
 ```
 helm repo add argo https://argoproj.github.io/argo-helm
 minikube kubectl create namespace argocd
 helm install argocd -n argocd argo/argo-cd
 ```
 
-3. ARC에서 사용하는 PAT을 위한 쿠버네티스 Secret 생성
+### 3. ARC용 GitHub Token Secret 생성 ###
+
+GitHub ARC가 GitHub 레포지토리에 접근할 수 있도록 Secret을 설정합니다.
 ```
 minikube kubectl create ns actions-runner-system
+```
+```
 minikube kubectl -- create secret generic controller-manager ^
   -n actions-runner-system ^
   --from-literal=github_token=<GITHUB_PAT>
 ```
 
-4. bootstrap 폴더에서 add-repo.yaml 파일 편집 후 클러스터에 apply
+
+### 4. ArgoCD Repository Secret 추가 ###
+
+ArgoCD가 GitHub레포지토리를 인식할 수 있도록 Secret을 설정합니다.
+
+이 때, <GITHB_NAME>에 GitHub 사용자명, <GITHUB_PAT>에 GitHub Action Token 값을 기입 후 배포합니다.
 ```
 apiVersion: v1
 kind: Secret
@@ -58,11 +61,13 @@ stringData:
 ```
 
 ```
-minikube kubectl -- apply -f add.repo.yaml
+minikube kubectl -- apply -f bootstrap/add.repo.yaml
 ```
 
-5. bootstrap 폴더에 있는 deploy-arc.yaml을 클러스터에 apply
+### 5. ARC 배포 ###
+
+ArgoCD를 통해 GitHub ARC를 관리할 수 있도록 ARC 및 관련 구성 요소를 배포합니다.
 ```
-minkube kubectl -- apply -f deploy-arc.yaml
+minkube kubectl -- apply -f bootstrap/deploy-arc.yaml
 ```
 
