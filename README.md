@@ -15,6 +15,7 @@
 
 # 아키텍처 #
 
+<img src="https://github.com/user-attachments/assets/b4c953f9-4e8e-42ff-b518-4cc42eaa5f36">
 
 
 본 저장소는 다음 과제(Task)들을 구현한 결과를 포함하고 있습니다.
