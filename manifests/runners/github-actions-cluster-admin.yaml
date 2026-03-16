@@ -4,7 +4,7 @@ metadata:
   name: github-actions-cluster-admin
 subjects:
 - kind: User
-  name: "https://token.actions.githubusercontent.com#repo:jeongmin99/deepauto-assignment:ref:refs/heads/main"
+  name: "https://token.actions.githubusercontent.com#repo:jeongmin99/self-arc:ref:refs/heads/main"
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole

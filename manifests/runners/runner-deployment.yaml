@@ -6,7 +6,7 @@ spec:
   replicas: 1
   template:
     spec:
-      repository: jeongmin99/deepauto-assignment
+      repository: jeongmin99/self-arc
       volumeMounts:
         - mountPath: /ca
           name: ca

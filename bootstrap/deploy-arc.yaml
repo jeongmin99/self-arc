@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/jeongmin99/deepauto-assignment
+    repoURL: https://github.com/jeongmin99/self-arc
     targetRevision: main
     path: manifests/cert-manager 
   destination:
@@ -30,7 +30,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/jeongmin99/deepauto-assignment
+    repoURL: https://github.com/jeongmin99/self-arc
     targetRevision: main
     path: manifests/actions-runner-controller
     helm:
@@ -56,7 +56,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/jeongmin99/deepauto-assignment
+    repoURL: https://github.com/jeongmin99/self-arc
     targetRevision: main
     path: manifests/runners    
   destination:

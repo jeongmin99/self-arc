@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: repo-deepauto
+  name: repo-arc
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  url: https://github.com/jeongmin99/deepauto-assignment
+  url: https://github.com/jeongmin99/self-arc
   type: git
   username: <GITHUB_NAME>
   password: <GITHUB_PAT>
