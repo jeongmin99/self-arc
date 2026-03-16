@@ -19,11 +19,11 @@
 
 본 저장소는 다음 과제(Task)들을 구현한 결과를 포함하고 있습니다.
 
-- Task 1 - `hello-kube`: Kubernetes Pod 실행 CLI 구현
-- Task 2 - Kubernetes 환경에 GitHub Actions Runner Controller(ARC) 배포
-- Task 3 - GitHub Actions에서 `hello-kube` 실행 (OIDC 인증 사용)
-- Extra Credit 1 - ArgoCD 기반 GitOps 방식으로 ARC 배포 관리
-- Extra Credit 2 - GitHub Actions를 통한 Docker 이미지 빌드
+- `hello-kube`: Kubernetes Pod 실행 CLI 구현
+- Kubernetes 환경에 GitHub Actions Runner Controller(ARC) 배포
+- GitHub Actions에서 `hello-kube` 실행 (OIDC 인증 사용)
+- ArgoCD 기반 GitOps 방식으로 ARC 배포 관리
+- GitHub Actions를 통한 Docker 이미지 빌드
 
 
 ## hello-kube CLI 구현
